@@ -1,0 +1,28 @@
+
+
+local library = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/0x"))()
+
+
+local w1 = library:Window("Homebrew Settings")
+
+w1:Button(
+    "enable",
+    function()
+        for i,v in pairs(game.CoreGui:GetChildren()) do
+ if v:FindFirstChild("ttop") then
+game.CoreGui.Discord.ttop.Visible = true
+end
+end
+    end
+)
+
+w1:Button(
+    "disable",
+    function()
+        for i,v in pairs(game.CoreGui:GetChildren()) do
+ if v:FindFirstChild("ttop") then
+game.CoreGui.Discord.ttop.Visible = false
+end
+end
+    end
+)
