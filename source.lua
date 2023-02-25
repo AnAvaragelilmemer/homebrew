@@ -58,7 +58,7 @@ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 local link = "https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/discord%20lib"
 
 local Discord = loadstring(game:HttpGetAsync(link))();
-local settings = "https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/toggler"
+local settings = "https://raw.githubusercontent.com/AnAvaragelilmemer/homebrew/blob/main/toggler"
 loadstring(game:HttpGetAsync(settings))()
 local window = Discord:Window("discord")
 
