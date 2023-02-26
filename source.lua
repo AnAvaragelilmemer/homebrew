@@ -1,5 +1,5 @@
 repeat task.wait() until game:IsLoaded() and game.ContentProvider.RequestQueueSize == 0;
-local loadtime = tick()
+local loadtime = os.time()
 local lplr = game.Players.LocalPlayer
 local chlplr = lplr.Character.Humanoid
 local name = lplr.Name
@@ -374,7 +374,7 @@ Scripts:Label("more will come soon")
 
 
 Notification:Notify(
-    {Title = "Loaded!", Description = "Homebrew "..version.." loaded in "..tick()-loadtime},
+    {Title = "Loaded!", Description = "Homebrew "..version.." loaded in "..os.time() - loadtime},
     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
 )
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/toggler"))()
