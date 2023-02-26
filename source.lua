@@ -9,6 +9,24 @@ local userid = lplr.UserId
 local version = "2.8"
 local light = game:GetService("Lighting")
 local RunService = game:GetService("RunService")
+local NetworkClient = game:GetService("NetworkClient")
+local char = lplr.Character
+
+
+getgenv().noclip = nil;
+function noclip()
+    if getgenv().noclip then
+      if char then
+          for i,v in pairs(char:GetDescendants()) do
+              if v:IsA("BasePart") and v.CanCollide then
+                  v.CanCollide = false 
+              end
+          end
+      end
+    end
+end
+
+            
 getgenv().fps = nil;
 function fpss()
 if getgenv().fps then
@@ -53,6 +71,7 @@ task.wait()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0, getgenv().spinspeed, 0)
 end
 end
+
 
 local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
@@ -101,6 +120,33 @@ local response = HS:JSONDecode(
 })
 .Body)
 info:Label("Friends: "..response.count)
+local req = http_request or request or (syn and syn.request)
+local HS = game:GetService("HttpService")
+local response = HS:JSONDecode(
+    req({
+    Url = "https://users.roblox.com/v1/users/"..game.Players.LocalPlayer.UserId
+})
+.Body)
+
+local res = response.created
+local ss = string.sub(res,1,10) 
+info:Label("Account creation: "..ss.."//"..lplr.AccountAge.."//"..math.floor(lplr.AccountAge/365*100)/(100))
+
+if lplr.MembershipType == Enum.MembershipType.Premium then
+    info:Label("Premium: True")
+        else
+    info:Label("Premium: False")
+end
+
+local UserInputService = game:GetService("UserInputService")
+local dev = 'Device'
+if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
+	info:Label(dev.." : Mobile")
+elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
+	info:Label(dev.." : PC")
+elseif UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
+	info:Label(dev.." : PC with touch screen")
+end
 
 local localplayer = Iridium:Channel("[🧍] Local-Player")
 
@@ -314,6 +360,10 @@ client:Toggle("Infinite jump",false, function(v)
     infjump()
 end)
 
+client:Toggle("Noclip",false, function(v)
+    getgenv().noclip = v;
+    noclip()
+end)
 client:Button("sit", function()
     lplr.Character.Humanoid.Sit = true
     end)
@@ -325,8 +375,9 @@ client:Button("Server hop", function()
 module:Teleport(game.PlaceId)
 end)
 
-
-
+client:Toggle("Freeze",false, function(v)
+char.HumanoidRootPart.Anchored = v 
+end)
 
 --more soon
 
