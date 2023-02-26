@@ -1,4 +1,5 @@
-repeat task.wait() until game:IsLoaded() and game.ContentProvider.RequestQueueSize == 0 
+repeat task.wait() until game:IsLoaded() and game.ContentProvider.RequestQueueSize == 0;
+local loadtime = tick()
 local lplr = game.Players.LocalPlayer
 local chlplr = lplr.Character.Humanoid
 local name = lplr.Name
@@ -188,32 +189,17 @@ end)
 
 local client = Iridium:Channel("[👀] Misc")
 
-client:Toggle("Client sided Headless",false, function(v)
-getgenv().headless = v 
-headless()
-end)
-
-client:Toggle("Enable/Disable rendering",false, function(v)
-    getgenv().render = v
-    render()
-    end)
-
-client:Toggle("Infinite jump",false, function(v)
-    getgenv().infjump = v 
-    infjump()
-end)
-
-client:Button("sit", function()
-    lplr.Character.Humanoid.Sit = true
-    end)
-
 client:Button("Fire Click Detector", function()
-    for i, v in pairs(game:GetDescendants()) do
-        if v:IsA('ClickDetector') and v.Parent:FindFirstChildOfClass('NumberValue') then
-            fireclickdetector(v, 3)
-        end
-    end
+    for i,v in pairs(game:GetDescendants()) do
+if v:IsA("ClickDetector") then
+fireclickdetector(v)
+end
+end
 end)
+
+
+client:Seperator()
+
 
 client:Button("Open ESP (SOON)", function()
     Notification:Notify(
@@ -222,8 +208,10 @@ client:Button("Open ESP (SOON)", function()
 )
 end)
 
+client:Seperator()
+
 client:Button(
-    "Fps boost",
+    "Fps boost/Low quality",
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/fps%20booster"))()
     end
@@ -236,30 +224,11 @@ client:Button(
     end
 )
 
-client:Toggle("Spinbot",false, function(v)
-    getgenv().spinbot = v 
-    spin()
-end)
+client:Toggle("Enable/Disable rendering",false, function(v)
+    getgenv().render = v
+    render()
+    end)
 
-client:Textbox("Spinbot speed", " ", true, function(v)
-getgenv().spinspeed = math.rad(v)
-end)
-
-client:Button(
-    "Chat logger",
-    function(v)
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/Chat%20logger"))()
-			Notification:Notify(
-    {Title = "Sucess!", Description = "Press F9 or type /console to see log chat"},
-    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 10, Type = "default"}
-)
-    end
-)
-
-client:Toggle("Fps unlock",false, function(v)
-getgenv().fps = v 
-fpss()
-end)
 
 client:Button(
 	"FullBright",
@@ -273,8 +242,91 @@ client:Button(
     game.Lighting.ClockTime = 14
     game.Lighting.Brightness = 2
     game.Lighting.GlobalShadows = false
-	end
+    end
 )
+
+client:Toggle("Fps unlock",false, function(v)
+getgenv().fps = v 
+fpss()
+end)
+
+client:Seperator()
+
+
+client:Toggle("Spinbot",false, function(v)
+    getgenv().spinbot = v 
+    spin()
+end)
+
+client:Textbox("Spinbot speed", " ", true, function(v)
+getgenv().spinspeed = math.rad(v)
+end)
+
+client:Seperator()
+
+client:Button(
+    "Chat logger",
+    function(v)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/Chat%20logger"))()
+			Notification:Notify(
+    {Title = "Sucess!", Description = "Press F9 or type /console to see chat"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 10, Type = "default"}
+)
+    end
+)
+
+client:Button(
+    "Join/Leave Logger",
+    function()
+     local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+ print(player.DisplayName .. " Joined.")
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+print(player.DisplayName .. " Left.")
+end)
+Notification:Notify(
+{Title = "Sucess!", Description = "Press F9 or type /console to see join logger"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 10, Type = "default"}
+)
+end)
+    
+client:Button(
+    "Audio Logger",
+    function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/v7Usg709', true))()
+    end)
+    
+
+client:Seperator()
+
+
+client:Toggle("Client sided Headless",false, function(v)
+getgenv().headless = v 
+headless()
+end)
+
+client:Toggle("Infinite jump",false, function(v)
+    getgenv().infjump = v 
+    infjump()
+end)
+
+client:Button("sit", function()
+    lplr.Character.Humanoid.Sit = true
+    end)
+
+client:Button("Server hop", function()
+    --not bothered to make a serverhop script cause its litterally the same as the script below
+    local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKholYt/roblox/main/lk_serverhop.lua")()
+
+module:Teleport(game.PlaceId)
+end)
+
+
+
+
 --more soon
 
 local Scripts = Iridium:Channel("[📜] Scripts")
@@ -322,7 +374,7 @@ Scripts:Label("more will come soon")
 
 
 Notification:Notify(
-    {Title = "Loaded!", Description = "Homebrew "..version.." is loaded."},
+    {Title = "Loaded!", Description = "Homebrew "..version.." loaded in "..loadtime},
     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
 )
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/toggler"))()
