@@ -374,7 +374,7 @@ Scripts:Label("more will come soon")
 
 
 Notification:Notify(
-    {Title = "Loaded!", Description = "Homebrew "..version.." loaded in "..loadtime},
+    {Title = "Loaded!", Description = "Homebrew "..version.." loaded in "..tick()-loadtime},
     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
 )
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/toggler"))()
