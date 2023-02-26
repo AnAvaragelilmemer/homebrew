@@ -1,5 +1,6 @@
-local loadtime = os.time()
+
 repeat task.wait() until game:IsLoaded() and game.ContentProvider.RequestQueueSize == 0;
+local loadtime = os.time()
 local lplr = game.Players.LocalPlayer
 local chlplr = lplr.Character.Humanoid
 local name = lplr.Name
