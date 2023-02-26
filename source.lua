@@ -264,6 +264,7 @@ end)
 client:Button(
 	"FullBright",
 	function()
+--not mine
 	light.Ambient = Color3.new(1, 1, 1)
     light.ColorShift_Bottom = Color3.new(1, 1, 1)
     light.ColorShift_Top = Color3.new(1, 1, 1)
