@@ -117,7 +117,7 @@ localplayer:Textbox("Field of view", " ", true, function(v)
 end)
 
 localplayer:Seperator()
---[[
+
 localplayer:Label("PC")
 
     localplayer:Slider(
@@ -148,7 +148,7 @@ localplayer:Label("PC")
        game.Workspace.Camera.FieldOfView = v
     end
 )
-]]
+
 localplayer:Button("Reset speed, jump, FOV.", function()
     TargetWalkspeed = v
     chlplr.JumpPower = 50
