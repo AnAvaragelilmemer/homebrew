@@ -10,12 +10,12 @@ local version = "2.8"
 local light = game:GetService("Lighting")
 local RunService = game:GetService("RunService")
 local NetworkClient = game:GetService("NetworkClient")
-local char = lplr.Character
 
 
 getgenv().noclip = nil;
 function noclip()
     if getgenv().noclip then
+local char = lplr.Character
       if char then
           for i,v in pairs(char:GetDescendants()) do
               if v:IsA("BasePart") and v.CanCollide then
